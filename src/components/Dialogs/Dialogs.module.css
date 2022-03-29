@@ -1,0 +1,17 @@
+.dialogs {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItem {
+  padding: 10px;
+}
+
+.messages {
+  padding: 10px;
+}
+
+.dialogsItem img {
+  width: 50px;
+  border-radius: 50%;
+}

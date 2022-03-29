@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+// import React from 'react';
+// import ProfileContainer from './components/Profile/ProfileContainer';
+// import HeaderContainer from './components/Header/HeaderContainer';
+// import NavBar from './components/NavBar/NavBar';
+// import UsersContainer from "./components/Users/UsersContainer";
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import Login from './components/Login/Login';
+// import { connect } from "react-redux";
+// import { HeaderTc } from "./redux/auth-reducer";
+// import { compose } from "redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// class App extends React.Component {
+//   componentDidMount() {
+//     this.props.HeaderTc();
+//   }
 
-export default App;
+
+//   render() {
+
+//     return (
+//       <Router>
+//         <div className='app-wrapper'>
+//           <HeaderContainer />
+//           <NavBar />
+//           <div className="app-wrapper-content">
+//             <Routes>
+//               <Route
+//                 path="/dialogs/*"
+//                 element={<DialogsContainer />}
+//               />
+//               <Route path="/profile/*" element={<ProfileContainer />}
+//               />
+//               <Route path='/profile/:userId' element={<ProfileContainer />} />
+//               <Route
+//                 path='/users/*'
+//                 element={
+//                   <UsersContainer />}
+//               />
+//               <Route
+//                 path='/login'
+//                 element={
+//                   <Login />}
+//               />
+//             </Routes>
+//           </div>
+//         </div>
+//       </Router>
+//     );
+//   }
+// }
+// export default compose(
+//   connect(null, { HeaderTc }))(App)
