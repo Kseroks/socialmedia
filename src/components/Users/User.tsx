@@ -2,6 +2,15 @@ import React from "react";
 import s from "./Users.module.css";
 import avatar from "../../assets/photos/avatar.jpg";
 import { NavLink } from "react-router-dom";
+import {UserType} from "../../types/types";
+
+type PropsType = {
+  user: UserType
+  followingInProgress: Array<number>
+  unfollow: (userId: number) => void
+  follow: (userId: number) => void
+
+}
 
 const User = ({ followingInProgress, UnFollowTc, FollowTc, user }) => {
   // debugger;
