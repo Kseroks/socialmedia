@@ -1,24 +1,24 @@
-// import React from "react"
-// import { Formik } from 'formik';
+import React from "react"
+import { Formik } from 'formik';
 
-// const DialogsMessage = (props) => {
-//     return (
-//         <div>
-//             <Formik initialValues={{ text: "" }} onSubmit={(values) => { props.addNewMessage(values.text) }}>
+const DialogsMessage = (props) => {
+    return (
+        <div>
+            <Formik initialValues={{ text: "" }} onSubmit={(values) => { props.addNewMessage(values.text) }}>
 
-//                 {({ values, handleSubmit, handleChange }) => (
-//                     <div>
+                {({ values, handleSubmit, handleChange }) => (
+                    <div>
 
-//                         <p>
-//                             <input onChange={handleChange} type={`text`} name={"text"} value={values.text} />
-//                         </p>
+                        <p>
+                            <input onChange={handleChange} type={`text`} name={"text"} value={values.text} />
+                        </p>
 
-//                         <button onClick={handleSubmit} type={"submit"}>Send</button>
-//                     </div>
-//                 )}
-//             </Formik>
+                        <button onClick={handleSubmit} type={"submit"}>Send</button>
+                    </div>
+                )}
+            </Formik>
 
-//         </div>
-//     )
-// }
-// export default DialogsMessage;
+        </div>
+    )
+}
+export default DialogsMessage;

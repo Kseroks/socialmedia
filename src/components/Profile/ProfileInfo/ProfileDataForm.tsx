@@ -1,93 +1,93 @@
-// import React from "react"
-// import { Formik } from 'formik';
+import React from "react"
+import { Formik } from 'formik';
 
-// const ProfileDataForm = ({ profile, SaveProfileTc, toEditMode }) => {
-// 	return (
-// 		<Formik
-// 			initialValues={profile}
-// 			onSubmit={(values) => { console.log(values); SaveProfileTc(values); toEditMode(false); }}
-// 		>
-// 			{({ values, handleSubmit, handleChange, handleBlur }) => (
-// 				<div>
-// 					<br />
-// 					<div>
-// 						<label htmlFor={"fullName"}><b>FullName</b> </label>
-// 						<input
-// 							type={`text`}
-// 							name={"fullName"}
-// 							value={values.fullName}
-// 							placeholder="FullName"
-// 							onChange={handleChange}
-// 							onBlur={handleBlur}
-// 						/>
-// 					</div>
-// 					<br />
+const ProfileDataForm = ({ profile, SaveProfileTc, toEditMode }) => {
+	return (
+		<Formik
+			initialValues={profile}
+			onSubmit={(values) => { console.log(values); SaveProfileTc(values); toEditMode(false); }}
+		>
+			{({ values, handleSubmit, handleChange, handleBlur }) => (
+				<div>
+					<br />
+					<div>
+						<label htmlFor={"fullName"}><b>FullName</b> </label>
+						<input
+							type={`text`}
+							name={"fullName"}
+							value={values.fullName}
+							placeholder="FullName"
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+					</div>
+					<br />
 
-// 					<div>
-// 						<label htmlFor={"lookingForAJob"}><b>lookingForAJob</b> </label>
-// 						<input
-// 							type={`checkbox`}
-// 							name={"lookingForAJob"}
-// 							value={values.lookingForAJob}
-// 							placeholder="lookingForAJob"
-// 							onChange={handleChange}
-// 							onBlur={handleBlur}
-// 						/>
-// 					</div>
-// 					<br />
+					<div>
+						<label htmlFor={"lookingForAJob"}><b>lookingForAJob</b> </label>
+						<input
+							type={`checkbox`}
+							name={"lookingForAJob"}
+							value={values.lookingForAJob}
+							placeholder="lookingForAJob"
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+					</div>
+					<br />
 
-// 					<div>
-// 						<div>
-// 							<label htmlFor={"lookingForAJobDescription"}><b>lookingForAJobDescription</b> </label>
-// 							<div>
-// 								<br />
-// 								<textarea
-// 									name={"lookingForAJobDescription"}
-// 									value={values.lookingForAJobDescription}
-// 									placeholder="lookingForAJobDescription"
-// 									onChange={handleChange}
-// 									onBlur={handleBlur}
-// 								/>
-// 							</div>
-// 						</div>
-// 					</div>
-// 					<br />
-// 					<div>
-// 						<div>
-// 							<label htmlFor={"aboutMe"}><b>aboutMe</b> </label>
-// 							<div>
-// 								<textarea
-// 									name={"aboutMe"}
-// 									value={values.aboutMe}
-// 									placeholder="aboutMe"
-// 									onChange={handleChange}
-// 									onBlur={handleBlur}
-// 								/>
-// 							</div>
-// 						</div>
-// 					</div>
-// 					<br />
-// 					<div>
-// 						<label htmlFor={"contacts"}>
-// 							<b>contacts :
-// 								{Object.keys(profile.contacts).map(key => {
-// 									return (<div key={key}><b>{key}:</b>
-// 										<input
-// 											type="text"
-// 											name={`"contacts".${key}`}
-// 											placeholder={key}
-// 										/></div>)
-// 								})}</b> </label>
-// 					</div>
-// 					<div><button
-// 						onClick={handleSubmit}
-// 						type={"submit"}
-// 					>Save</button></div>
-// 				</div>
+					<div>
+						<div>
+							<label htmlFor={"lookingForAJobDescription"}><b>lookingForAJobDescription</b> </label>
+							<div>
+								<br />
+								<textarea
+									name={"lookingForAJobDescription"}
+									value={values.lookingForAJobDescription}
+									placeholder="lookingForAJobDescription"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div>
+						<div>
+							<label htmlFor={"aboutMe"}><b>aboutMe</b> </label>
+							<div>
+								<textarea
+									name={"aboutMe"}
+									value={values.aboutMe}
+									placeholder="aboutMe"
+									onChange={handleChange}
+									onBlur={handleBlur}
+								/>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div>
+						<label htmlFor={"contacts"}>
+							<b>contacts :
+								{Object.keys(profile.contacts).map(key => {
+									return (<div key={key}><b>{key}:</b>
+										<input
+											type="text"
+											name={`"contacts".${key}`}
+											placeholder={key}
+										/></div>)
+								})}</b> </label>
+					</div>
+					<div><button
+						onClick={handleSubmit}
+						type={"submit"}
+					>Save</button></div>
+				</div>
 
-// 			)}
-// 		</Formik>
-// 	)
-// }
+			)}
+		</Formik>
+	)
+}
 
-// export default ProfileDataForm;
+export default ProfileDataForm;

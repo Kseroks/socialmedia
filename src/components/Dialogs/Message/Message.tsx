@@ -1,8 +1,8 @@
-// import React from "react";
-// const Message = ({ message }) => {
+import React from "react";
+const Message = ({ message }) => {
 
-// 	return (
-// 		<div>{message}</div>
-// 	)
-// };
-// export default Message;
+	return (
+		<div>{message}</div>
+	)
+};
+export default Message;
