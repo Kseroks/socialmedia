@@ -1,11 +1,11 @@
 import "./App.css";
 import React from "react";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavBar from "./components/NavBar/NavBar";
 import UsersContainer from "./components/Users/UsersContainer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Login from "./components/Login/Login";
 import { connect } from "react-redux";
 import { HeaderTc } from "./redux/auth-reducer";

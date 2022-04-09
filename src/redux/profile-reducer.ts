@@ -18,7 +18,7 @@ let initialState = {
 	newPostText: "" as string,
 }
 
-const profileReducer = (state = initialState, action: any): initialStateType => {
+const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
 	switch (action.type) {
 		case "profile/ADD_POST": {
 			let newPost = {
@@ -43,15 +43,12 @@ const profileReducer = (state = initialState, action: any): initialStateType => 
 			return { ...state, status: action.status }
 		}
 		case "profile/SAVE_PHOTO": {
-			return {
-				...state, profile: { ...state.profile, photos: { ...state.profile.photos, large: action.photo } }
-			}
+			return { ...state, profile: { ...state.profile, photos: action.photos } as ProfileType }
 		}
 		// case SAVE_PROFILE: {
 		// 	return {}
 		// }
-		default:
-			return state;
+		default: return state;
 	}
 };
 
@@ -69,29 +66,34 @@ export const actions = {
 
 // TC - ThunkCreator
 export const ProfileTc = (userID: number): ThunkType => async (dispatch) => {
-	let response = await ProfileApi.getUsers(userID);
-	dispatch(actions.SetUserProfileAc(response.data));
+	let data = await ProfileApi.getUsers(userID);
+	dispatch(actions.SetUserProfileAc(data));
 }
 export const GetStatusTc = (userID: number): ThunkType => async (dispatch) => {
-	let response = await ProfileApi.getUsersStatus(userID);
-	dispatch(actions.SetUserStatusAc(response.data));
+	let data = await ProfileApi.getUsersStatus(userID);
+	dispatch(actions.SetUserStatusAc(data));
 }
 export const UpDateStatusTc = (status: string): ThunkType => async (dispatch) => {
-	let response = await ProfileApi.UpDateStatusTc(status);
-	if (response.data.resultCode === 0) {
+	let data = await ProfileApi.UpDateStatusTc(status);
+	if (data.resultCode === 0) {
 		dispatch(actions.SetUserStatusAc(status));
 	}
 }
-export const SavePhotoTc = (file: any): ThunkType => async (dispatch) => {
-	let response = await ProfileApi.savePhoto(file);
-	dispatch(actions.SavePhotoAc(response.data.photos));
+export const SavePhotoTc = (file: File): ThunkType => async (dispatch) => {
+	let data = await ProfileApi.savePhoto(file);
+	if (data.resultCode === 0) {
+		dispatch(actions.SavePhotoAc(data.data.photos));
+	}
 }
 export const SaveProfileTc = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
 	const userID = getState().auth.userId;
-	let response = await ProfileApi.saveProfile(profile);
-	if (response.data.resultCode === 0) {
-		dispatch(ProfileTc(userID));
+	const data = await ProfileApi.saveProfile(profile);
+	if (data.resultCode === 0) {
+		if (userID !== null) {
+			dispatch(ProfileTc(userID));
+		} else {
+			console.log("error");
+		}
 	}
 }
-
 export default profileReducer;

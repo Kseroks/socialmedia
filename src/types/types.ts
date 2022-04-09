@@ -26,7 +26,7 @@ export type ProfileType = {
 	contacts: ContactsType
 	photos: PhotosType
 }
-export type UsersType = {
+export type UserType = {
 	id: number
 	name: string
 	status: string

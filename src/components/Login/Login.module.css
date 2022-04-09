@@ -18,6 +18,17 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
+  margin: 5px;
+}
+
+.rememberMe {
+  line-height: 1.5em;
+  border-radius: 4px;
+  padding: 4px 6px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 5px;
 }
 .error {
   color: red;

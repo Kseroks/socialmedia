@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const ProfileStatusWithHook = (props) => {
+const ProfileStatusWithHook: React.FC<any>= (props) => {
 	let [editMode, SetEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
 
@@ -17,7 +17,7 @@ const ProfileStatusWithHook = (props) => {
 		props.UpDateStatusTc(status);
 	};
 
-	const onStatusChange = (event) => {
+	const onStatusChange = (event:any) => {
 		setStatus(event.currentTarget.value);
 	};
 

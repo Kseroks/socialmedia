@@ -1,14 +1,22 @@
-import { instance } from "./api";
+import { instance, APIResponseType, ResultCodesEnum } from "./api";
 
+type MeResponseDataType = {
+	id: number
+	email: string
+	login: string
+}
+type LoginResponseDataType = {
+	userId: number
+}
 
 export const HeaderApi = {
-	getUsers() {
-		return instance.get(`auth/me`);
+	async getUsers() {
+		const res = await instance.get<APIResponseType<MeResponseDataType>>(`auth/me`);
+		return res.data;
 	},
-	login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
-		return instance.post(`auth/login`, {
-			email, password, rememberMe, captcha
-		});
+	async login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
+		const res = await instance.post<APIResponseType<LoginResponseDataType, ResultCodesEnum>>(`auth/login`, { email, password, rememberMe, captcha });
+		return res.data;
 	},
 	logOut() {
 		return instance.delete(`auth/login`);

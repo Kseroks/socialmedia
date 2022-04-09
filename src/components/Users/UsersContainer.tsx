@@ -1,61 +1,50 @@
 import React from "react";
+// import WithAuthRedirect from "../../hoc/WithAuthRedirect";
+import { getIsFetchingSel } from "../../redux/users-selectors";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { connect } from "react-redux";
-import { UnFollowTc, FollowTc, SetCurrentPageAc, ToggleFollowingProgressAc, GetUsersTc, } from "../../redux/users-reducer";
-import WithAuthRedirect from "../../hoc/WithAuthRedirect";
-import { compose } from "redux";
-import { getPageSizeSel, getUsersSel, getTotalUsersCountSel, getCurrentPageSel, getIsFetchingSel, getFollowingInProgress } from "../../redux/users-selectors";
 
-class UserContainer extends React.Component {
-	componentDidMount() {
-		let { currentPage, pageSize } = this.props;
-		this.props.GetUsersTc(currentPage, pageSize);
-	}
+import { useSelector } from "react-redux";
 
-	onPostChanged = (pageNumber) => {
-		this.props.SetCurrentPageAc(pageNumber);
-		this.props.GetUsersTc(pageNumber, this.props.pageSize);
-	}
+// class UserContainer extends React.Component<any> {
+//   componentDidMount() {
+//     let { currentPage, pageSize } = this.props;
+//     this.props.GetUsersTc(currentPage, pageSize);
+//   }
 
+//   onPostChanged = (pageNumber: number) => {
+//     this.props.SetCurrentPageAc(pageNumber);
+//     this.props.GetUsersTc(pageNumber, this.props.pageSize);
+//   };
 
-	render() {
-		return (
-			<>
-				{this.props.isFetching ? <Preloader /> : null}
-				<Users
-					totalUsersCount={this.props.totalUsersCount}
-					pageSize={this.props.pageSize}
-					currentPage={this.props.currentPage}
-					onPostChanged={this.onPostChanged}
-					users={this.props.users}
-					FollowTc={this.props.FollowTc}
-					UnFollowTc={this.props.UnFollowTc}
-					ToggleFollowingProgressAc={this.props.ToggleFollowingProgressAc}
-					followingInProgress={this.props.followingInProgress}
-				/>
-			</>
-		)
-	}
-}
+//   render() {
+//     return (
+//       <>
+//         {this.props.isFetching ? <Preloader /> : null}
+//         <Users
+//           totalUsersCount={this.props.totalUsersCount}
+//           pageSize={this.props.pageSize}
+//           currentPage={this.props.currentPage}
+//           onPostChanged={this.onPostChanged}
+//           users={this.props.users}
+//           FollowTc={this.props.FollowTc}
+//           UnFollowTc={this.props.UnFollowTc}
+//           followingInProgress={this.props.followingInProgress}
+//         />
+//       </>
+//     );
+//   }
+// }
 
 
+const UsersContainer = () => {
+  const isFetching = useSelector(getIsFetchingSel);
 
-const mapStateToProps = (state) => {
-	return {
-		users: getUsersSel(state),
-		pageSize: getPageSizeSel(state),
-		totalUsersCount: getTotalUsersCountSel(state),
-		currentPage: getCurrentPageSel(state),
-		isFetching: getIsFetchingSel(state),
-		followingInProgress: getFollowingInProgress(state),
-	}
-
-}
-
-export default
-	compose(
-		WithAuthRedirect,
-		connect(mapStateToProps,
-			{ UnFollowTc, FollowTc, SetCurrentPageAc, ToggleFollowingProgressAc, GetUsersTc }),
-	)(UserContainer)
+  return (
+    <>
+      {isFetching ? <Preloader /> : null}
+      <Users />
+    </>
+  );
+};
+export default UsersContainer;

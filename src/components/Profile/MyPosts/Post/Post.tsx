@@ -2,7 +2,12 @@ import React from "react";
 import s from "./Post.module.css";
 import avatar from "../../../../assets/photos/avatar.jpg";
 
-const Post = (props) => {
+interface PropsType  {
+	message: string;
+	likesCount: number;
+}
+
+const Post: React.FC<PropsType>= (props) => {
 
 	return (
 		<div className={s.item}>

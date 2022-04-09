@@ -3,8 +3,15 @@ import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem//DialogItem";
 import Message from "./Message/Message";
 import DialogsMessage from "../Dialogs/DialogsMessage";
+import { initialStateType } from "../../redux/dialogs-reducer";
+import { actions } from "../../redux/dialogs-reducer";
 
-const Dialogs = (props) => {
+type PropsType = {
+	dialogsPage: initialStateType
+}
+
+
+const Dialogs: React.FC<PropsType>= (props) => {
 	let state = props.dialogsPage;
 
 	const dialogElement = state.dialogs.map((dialog, i) => {
@@ -16,8 +23,8 @@ const Dialogs = (props) => {
 	})
 
 
-	let addNewMessage = (values) => {
-		props.sendMessage(values)
+	let addNewMessage = (values:any) => {
+		actions.sendMessageAc(values.newMessageBody);
 	}
 
 
@@ -34,6 +41,4 @@ const Dialogs = (props) => {
 		</>
 	)
 };
-
-
 export default Dialogs;

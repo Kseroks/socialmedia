@@ -1,13 +1,19 @@
 import React from "react"
 import { Formik } from 'formik';
 
-const ProfileDataForm = ({ profile, SaveProfileTc, toEditMode }) => {
+// type PropsType = {
+// 	profile: any;
+// 	SaveProfileTc: (profile: any) => Promise<any>;
+// 	toEditMode: () => void;
+// }
+
+const ProfileDataForm: React.FC<any>= ({ profile, SaveProfileTc, toEditMode }) => {
 	return (
 		<Formik
 			initialValues={profile}
-			onSubmit={(values) => { console.log(values); SaveProfileTc(values); toEditMode(false); }}
+			onSubmit={(values) => {SaveProfileTc(values); toEditMode(false); }}
 		>
-			{({ values, handleSubmit, handleChange, handleBlur }) => (
+			{({ values, handleChange, handleBlur }) => (
 				<div>
 					<br />
 					<div>
@@ -80,7 +86,6 @@ const ProfileDataForm = ({ profile, SaveProfileTc, toEditMode }) => {
 								})}</b> </label>
 					</div>
 					<div><button
-						onClick={handleSubmit}
 						type={"submit"}
 					>Save</button></div>
 				</div>

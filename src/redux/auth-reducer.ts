@@ -1,6 +1,7 @@
 import { SecurityApi } from "../api/SecurityApi";
 import { HeaderApi } from "../api/HeaderApi";
 import { BaseThunkType, InferActionsTypes } from './redux-store'
+import {ResultCodesEnum} from "../api/api";
 
 // Types
 
@@ -54,35 +55,35 @@ export const actions = {
 // THUNK CREATORS
 
 export const HeaderTc = (): ThunkType => async (dispatch) => {
-  const response = await HeaderApi.getUsers();
-  if (response.data.resultCode === 0) {
-    const { id, email, login } = response.data.data;
+  const data = await HeaderApi.getUsers();
+  if (data.resultCode === ResultCodesEnum.Success) {
+    const { id, email, login } = data.data;
     dispatch(actions.setAuthUserDataAc(id, email, login, true));
   }
 };
 
 export const LoginTc = (email: string, password: string, rememberMe: boolean, setStatus: any, captcha: string): ThunkType => async (dispatch) => {
-  let response = await HeaderApi.login(email, password, rememberMe, captcha);
-  if (response.data.resultCode === 0) {
+  let data = await HeaderApi.login(email, password, rememberMe, captcha);
+  if (data.resultCode === ResultCodesEnum.Success) {
     dispatch(HeaderTc());
   } else {
-    if (response.data.resultCode === 10) {
+    if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
       dispatch(getCaptchaUrlTc());
     }
-    setStatus(response.data.messages);
+    setStatus(data.messages);
   }
 };
 
 export const LogOutTc = (): ThunkType => async (dispatch) => {
   const response = await HeaderApi.logOut();
-  if (response.data.resultCode === 0) {
+  if (response.data.resultCode === ResultCodesEnum.Success) {
     dispatch(actions.setAuthUserDataAc(null, null, null, false));
   }
 };
 
 export const getCaptchaUrlTc = (): ThunkType => async (dispatch) => {
-  const response = await SecurityApi.getCaptchaUrl();
-  const captchaUrl = response.data.url;
+  const data = await SecurityApi.getCaptchaUrl();
+  const captchaUrl = data.url;
   dispatch(actions.getCaptchaUrlAc(captchaUrl));
 };
 
