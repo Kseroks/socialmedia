@@ -1,32 +1,28 @@
-import React from "react";
-import s from "./Dialogs.module.css";
-import DialogItem from "./DialogItem//DialogItem";
-import Message from "./Message/Message";
-import DialogsMessage from "../Dialogs/DialogsMessage";
-import { initialStateType } from "../../redux/dialogs-reducer";
+
+import {useDispatch,useSelector} from "react-redux";
+import {getDialogsPageSel} from "../../redux/dialogs-selectors";
 import { actions } from "../../redux/dialogs-reducer";
+import {DialogsMessage} from "../Dialogs/DialogsMessage";
+import {DialogItem} from "./DialogItem//DialogItem";
+import {Message} from "./Message/Message";
+import s from "./Dialogs.module.css";
 
-type PropsType = {
-	dialogsPage: initialStateType
-}
+export const Dialogs = () => {
 
+	const dialogsPage = useSelector(getDialogsPageSel);
+	const dispatch = useDispatch();
 
-const Dialogs: React.FC<PropsType>= (props) => {
-	let state = props.dialogsPage;
-
-	const dialogElement = state.dialogs.map((dialog, i) => {
+	const dialogElement = dialogsPage.dialogs.map((dialog, i) => {
 		return <DialogItem key={i} name={dialog.name} id={dialog.id} />;
 	})
 
-	const messageElement = state.messages.map((message, i) => {
+	const messageElement = dialogsPage.messages.map((message, i) => {
 		return <Message key={i} message={message.message} />;
 	})
 
-
-	let addNewMessage = (values:any) => {
-		actions.sendMessageAc(values.newMessageBody);
+	const addNewMessage = (values: string) => {
+		dispatch(actions.sendMessageAc(values));
 	}
-
 
 	return (
 		<>
@@ -41,4 +37,3 @@ const Dialogs: React.FC<PropsType>= (props) => {
 		</>
 	)
 };
-export default Dialogs;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,11 +10,11 @@ import {
   getFollowingInProgressSel,
 } from "../../redux/users-selectors";
 import { GetUsersTc } from "../../redux/users-reducer";
-import { actions } from "../../redux/users-reducer";
-
+import { UnFollowTc, FollowTc } from "../../redux/users-reducer";
 // useEffect масив "пуста зависимость" означає коли компонента вмонтуєтся
 
-const Users = () => {
+export const Users = () => {
+
   const totalUsersCount = useSelector(getTotalUsersCountSel);
   const currentPage = useSelector(getCurrentPageSel);
   const pageSize = useSelector(getPageSizeSel);
@@ -22,24 +22,28 @@ const Users = () => {
   const followingInProgress = useSelector(getFollowingInProgressSel);
   const dispatch = useDispatch();
 
+
+
   useEffect(() => {
     dispatch(GetUsersTc(currentPage, pageSize));
-  }, [currentPage, dispatch, pageSize]);
+  }, [currentPage, dispatch, pageSize,]);
 
   const onPostChanged = (pageNumber: number) => {
     dispatch(GetUsersTc(pageNumber, pageSize));
   };
 
-  const FollowTc = (userId: number) => {
-    dispatch(actions.FollowAc(userId));
+  const FollowTc1 = (userId: number) => {
+    dispatch(FollowTc(userId));
   };
 
-  const UnFollowTc = (userId: number) => {
-    dispatch(actions.UnFollowAc(userId));
+  const UnFollowTc1 = (userId: number) => {
+    dispatch(UnFollowTc(userId));
   };
+  
 
   return (
     <div>
+      <>        
       <Paginator
         totalItemsCount={totalUsersCount}
         pageSize={pageSize}
@@ -52,12 +56,13 @@ const Users = () => {
           user={user}
           key={i}
           followingInProgress={followingInProgress}
-          UnFollowTc={UnFollowTc}
-          FollowTc={FollowTc}
+          UnFollowTc={UnFollowTc1}
+          FollowTc={FollowTc1}
         />
       ))}
+        
+        </>
     </div>
+    
   );
 };
-
-export default Users;

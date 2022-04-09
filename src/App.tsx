@@ -1,15 +1,16 @@
 import "./App.css";
 import React from "react";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {Dialogs} from "./components/Dialogs/Dialogs";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import NavBar from "./components/NavBar/NavBar";
-import UsersContainer from "./components/Users/UsersContainer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import { connect } from "react-redux";
 import { HeaderTc } from "./redux/auth-reducer";
 import { compose } from "redux";
+import { UsersContainer } from "./components/Users/UsersContainer";
+
 
 class App extends React.Component<any, any> {
   componentDidMount() {
@@ -24,7 +25,7 @@ class App extends React.Component<any, any> {
           <NavBar />
           <div className="app-wrapper-content">
             <Routes>
-              <Route path="/dialogs/*" element={<DialogsContainer />} />
+              <Route path="/dialogs/*" element={<Dialogs />} />
               <Route path="/profile/*" element={<ProfileContainer />} />
               <Route path="/profile/:userId" element={<ProfileContainer />} />
               <Route path="/users/*" element={<UsersContainer />} />

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { UpDateStatusTc } from "../../../redux/profile-reducer";
 
-const ProfileStatusWithHook: React.FC<any>= (props) => {
+const ProfileStatusWithHook: React.FC<any> = (props) => {
+	
+
 	let [editMode, SetEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
 
@@ -14,7 +17,7 @@ const ProfileStatusWithHook: React.FC<any>= (props) => {
 
 	const deactivatedEditMode = () => {
 		SetEditMode(false)
-		props.UpDateStatusTc(status);
+		UpDateStatusTc(status);
 	};
 
 	const onStatusChange = (event:any) => {

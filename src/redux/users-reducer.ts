@@ -66,13 +66,13 @@ const usersReducer = (state: initialStateType = initialState, action: ActionsTyp
 
 // ACTION CREATE
 export const actions = {
-  FollowAc: (userID: any) => ({ type: "FOLLOW", userID } as const),
-  UnFollowAc: (userID: any) => ({ type: "UN_FOLLOW", userID } as const),
+  FollowAc: (userID: number) => ({ type: "FOLLOW", userID } as const),
+  UnFollowAc: (userID: number) => ({ type: "UN_FOLLOW", userID } as const),
   SetUsersAc: (users: Array<UserType>) => ({ type: "SET_USERS", users } as const),
-  SetCurrentPageAc: (currentPage: any) => ({ type: "SET_COUNT_PAGE", currentPage } as const),
-  SetTotalUsersCountAc: (totalCount: any) => ({ type: "SET_TOTAL_USERS_COUNT", totalCount } as const),
-  ToggleIsFetchingAc: (isFetching: any) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
-  ToggleFollowingProgressAc: (isFetching: any, userID: any) => ({ type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId: userID, } as const),
+  SetCurrentPageAc: (currentPage: number) => ({ type: "SET_COUNT_PAGE", currentPage } as const),
+  SetTotalUsersCountAc: (totalCount: number) => ({ type: "SET_TOTAL_USERS_COUNT", totalCount } as const),
+  ToggleIsFetchingAc: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
+  ToggleFollowingProgressAc: (isFetching: boolean, userID: number) => ({ type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId: userID, } as const),
 };
 
 // Thunk Creators
@@ -85,6 +85,7 @@ export const GetUsersTc =
       dispatch(actions.SetUsersAc(data.items));
       dispatch(actions.SetTotalUsersCountAc(data.totalCount));
     };
+
 export const FollowTc =
   (userID: number): ThunkType =>
     async (dispatch) => {
@@ -94,7 +95,9 @@ export const FollowTc =
         dispatch(actions.FollowAc(userID));
       }
       dispatch(actions.ToggleFollowingProgressAc(false, userID));
+  
     };
+
 export const UnFollowTc =
   (userID: number): ThunkType =>
     async (dispatch) => {

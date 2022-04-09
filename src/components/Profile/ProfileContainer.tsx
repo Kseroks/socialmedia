@@ -1,6 +1,6 @@
 import React from "react";
 import { ProfileTc } from "../../redux/profile-reducer";
-import Profile from "./Profile";
+import {Profile} from "./Profile";
 import { GetStatusTc } from "../../redux/profile-reducer";
 import { useSelector, useDispatch } from "react-redux";
 import { useMatch } from 'react-router-dom';
@@ -49,23 +49,20 @@ import { authorizedUserIdSel } from "../../redux/auth-selectors";
 //   }
 // }
 
-const ProfileContainer: React.FC<any> = () => {
+export const ProfileContainer: React.FC<any> = () => {
   const authorizedUserId:any = useSelector(authorizedUserIdSel);
   const dispatch = useDispatch();
   const match:any = useMatch('/profile/:userId/');
-
 
   useEffect(() => {
     let userId = match ? match.params.userId : authorizedUserId;
     dispatch(ProfileTc(userId));
     dispatch(GetStatusTc(userId));
   }, [authorizedUserId, dispatch, match]);
-
   return (
     <div>
       <Profile isOwner={!match} />
     </div>
   );
 };
-export default ProfileContainer;
 // export default compose(WithAuthRedirect, withRouter)(ProfileContainer);

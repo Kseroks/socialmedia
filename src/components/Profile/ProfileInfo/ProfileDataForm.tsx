@@ -1,17 +1,17 @@
 import React from "react"
 import { Formik } from 'formik';
+import { SaveProfileTc } from "../../../redux/profile-reducer";
 
-// type PropsType = {
-// 	profile: any;
-// 	SaveProfileTc: (profile: any) => Promise<any>;
-// 	toEditMode: () => void;
-// }
+const ProfileDataForm: React.FC<any> = ({profile, toEditMode }) => {
 
-const ProfileDataForm: React.FC<any>= ({ profile, SaveProfileTc, toEditMode }) => {
+
 	return (
 		<Formik
 			initialValues={profile}
-			onSubmit={(values) => {SaveProfileTc(values); toEditMode(false); }}
+			onSubmit={(values) => {
+				SaveProfileTc(values);
+				toEditMode(false);
+			}}
 		>
 			{({ values, handleChange, handleBlur }) => (
 				<div>

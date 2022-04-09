@@ -1,25 +1,26 @@
-import React from "react"
-import { Formik } from 'formik';
+import { Formik, Form, Field } from "formik";
 
-interface PropsType  {
-    addNewMessage: (newMessageBody: string) => void   
-}
+interface PropsType { addNewMessage: (values: string) => void };
 
-
-const DialogsMessage: React.FC<PropsType>= (props) => {
-    return (
-        <div>
-            <Formik  initialValues={{ text: "" }} onSubmit={(values) => { props.addNewMessage(values.text) }}>
-                {({ values,handleChange }) => (
-                    <div>
-                        <p>
-                            <input onChange={handleChange} type={`text`} name={"text"} value={values.text} />
-                        </p>
-                        <button type={"submit"}>Send</button>
-                    </div>
-                )}
-            </Formik>
-        </div>
-    )
-}
-export default DialogsMessage;
+export const DialogsMessage: React.FC<PropsType> = ({addNewMessage}) => {
+  return (
+    <div>
+      <Formik
+        initialValues={{ text: "" }}
+				onSubmit={(values, { setSubmitting }) => {
+					addNewMessage(values.text);
+          setSubmitting(false);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <Field type="text" name="text" />
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+};

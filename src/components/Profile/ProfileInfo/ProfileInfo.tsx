@@ -1,28 +1,32 @@
 import React, { useState } from "react";
-import Preloader from "../../common/Preloader/Preloader";
+import {Preloader} from "../../common/Preloader/Preloader";
 import s from "./ProfileInfo.module.css";
 import ProfileStatusWithHook from "./ProfileStatusWithHook";
 import avatar from "../../../assets/photos/avatar.jpg";
 import ProfileDataForm from "./ProfileDataForm";
+import { ProfileData } from "./ProfileData";
+import { useSelector } from "react-redux";
+import { SavePhotoTc } from "../../../redux/profile-reducer";
+import {getStatusSel,getProfileSel} from "../../../redux/profile-selectors";
 
-const ProfileInfo: React.FC<any> = ({
-  profile,
-  status,
-  UpDateStatusTc,
-  isOwner,
-  SavePhotoTc,
-  SaveProfileTc,
-}) => {
+export const ProfileInfo: React.FC<any> = ({isOwner}) => {
+	
   const [editMode, setEditMode] = useState<any>(false);
+	const status = useSelector(getStatusSel);
+  const profile = useSelector(getProfileSel);
+  
+
 
   if (!profile) {
     return <Preloader />;
-  }
+	}
+	
   const onMainPhotoSelected = (event: any) => {
     if (event.target.files.length) {
-      SavePhotoTc(event.target.files[0]);
+    SavePhotoTc(event.target.files[0]);
     }
-  };
+	};
+	
   return (
     <div>
       {/* <div>
@@ -38,63 +42,20 @@ const ProfileInfo: React.FC<any> = ({
           />
           {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
           <div>
-            <ProfileStatusWithHook
-              status={status}
-              UpDateStatusTc={UpDateStatusTc}
-            />
+            <ProfileStatusWithHook status={status}/>
           </div>
         </div>
         {editMode ? (
-          <ProfileDataForm
-            toEditMode={() => {
-              setEditMode(false);
-            }}
-            SaveProfileTc={SaveProfileTc}
-            profile={profile}
-          />
+          <ProfileDataForm toEditMode={() => {setEditMode(false);}}
+						profile={profile}/>
         ) : (
-          <ProfileData
+          <ProfileData profile={profile} isOwner={isOwner}
             toEditMode={() => {
               setEditMode(true);
             }}
-            profile={profile}
-            isOwner={isOwner}
           />
         )}
       </div>
     </div>
   );
 };
-
-const ProfileData: React.FC<any> = ({ profile, isOwner, toEditMode }) => {
-  return (
-    <div>
-      <div>{isOwner && <button onClick={toEditMode}>edit</button>}</div>
-      <p>{profile.aboutMe}</p>
-      <p>Состояния роботи: {profile.lookingForAJob ? "Да" : "Нет"}</p>
-      <p>{profile.lookingForAJobDescription}</p>
-      <div>
-        Contacts:
-        {Object.keys(profile.contacts).map((key, j) => {
-          return (
-            <Contact
-              key={j}
-              contactTitle={key}
-              contactValue={profile.contacts[key]}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-const Contact: React.FC<any> = ({ contactTitle, contactValue }) => {
-  return (
-    <div>
-      <b>{contactTitle}</b>:{contactValue}
-    </div>
-  );
-};
-
-export default ProfileInfo;
