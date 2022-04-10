@@ -1,15 +1,12 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
-import s from "./Login.module.css";
+import { NavLink } from "react-router-dom";
 import {connect, useSelector } from "react-redux";
 import { LoginTc } from "../../redux/auth-reducer";
-import { NavLink } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { getIsAuthSel, getCaptchaUrlSel } from "../../redux/auth-selectors";
+import s from "./Login.module.css";
 
-// interface PropsType {
-//   LoginTc: (email: string, password: string, rememberMe: boolean, captcha: string,setStatus: any) => void;
-// }
 
 const Login: React.FC<any> = ({LoginTc}) => {
   const isAuth = useSelector(getIsAuthSel);
@@ -42,7 +39,6 @@ const Login: React.FC<any> = ({LoginTc}) => {
           setStatus,
           values.captcha
         );
-        console.log(values);
         setSubmitting(false);
       }}
     >

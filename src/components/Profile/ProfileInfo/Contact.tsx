@@ -1,4 +1,3 @@
-
 import React from "react";
 
 export const Contact: React.FC<any> = ({ contactTitle, contactValue }) => {

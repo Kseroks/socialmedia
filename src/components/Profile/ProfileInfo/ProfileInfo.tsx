@@ -1,56 +1,52 @@
-import React, { useState } from "react";
-import {Preloader} from "../../common/Preloader/Preloader";
-import s from "./ProfileInfo.module.css";
-import ProfileStatusWithHook from "./ProfileStatusWithHook";
-import avatar from "../../../assets/photos/avatar.jpg";
-import ProfileDataForm from "./ProfileDataForm";
-import { ProfileData } from "./ProfileData";
-import { useSelector } from "react-redux";
+import { useState,FC } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { SavePhotoTc } from "../../../redux/profile-reducer";
-import {getStatusSel,getProfileSel} from "../../../redux/profile-selectors";
+import { ProfileDataForm } from "./ProfileDataForm";
+import { ProfileData } from "./ProfileData";
+import { ProfileStatus } from "./ProfileStatus";
+import { Preloader } from "../../common/Preloader/Preloader";
+import { getStatusSel, getProfileSel } from "../../../redux/profile-selectors";
+import avatar from "../../../assets/photos/avatar.jpg";
+import s from "./ProfileInfo.module.css";
 
-export const ProfileInfo: React.FC<any> = ({isOwner}) => {
-	
+
+
+
+export const ProfileInfo:FC<any> = ({ isOwner }) => {
+
   const [editMode, setEditMode] = useState<any>(false);
-	const status = useSelector(getStatusSel);
+  const status = useSelector(getStatusSel);
   const profile = useSelector(getProfileSel);
-  
-
+  const dispatch = useDispatch();
 
   if (!profile) {
     return <Preloader />;
-	}
-	
-  const onMainPhotoSelected = (event: any) => {
-    if (event.target.files.length) {
-    SavePhotoTc(event.target.files[0]);
+  }
+
+  const onMainPhotoSelected = (e: any) => {
+    if (e.target.files.length) {
+      dispatch(SavePhotoTc(e.target.files[0]));
     }
-	};
-	
+  };
+
   return (
     <div>
-      {/* <div>
-				<img src='https://cdn.pixabay.com/photo/2021/10/27/11/33/kids-things-6747073__480.jpg' alt="222"></img>
-			</div> */}
       <div className={s.descriptionBlock}>
         <div>
           <h2>{profile.fullName}</h2>
-          <img
-            className={s.avatar}
-            src={profile.photos.large || avatar}
-            alt="userPhoto"
-          />
+          <img className={s.avatar} src={profile.photos.large || avatar}
+            alt="userPhoto"/>
           {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
           <div>
-            <ProfileStatusWithHook status={status}/>
+            <ProfileStatus PrevStatus={status} />
           </div>
         </div>
         {editMode ? (
-          <ProfileDataForm toEditMode={() => {setEditMode(false);}}
-						profile={profile}/>
+          <ProfileDataForm
+            toEditMode={() => {setEditMode(false);}} profile={profile}/>
         ) : (
-          <ProfileData profile={profile} isOwner={isOwner}
-            toEditMode={() => {
+            <ProfileData profile={profile} isOwner={isOwner}
+              toEditMode={() => {
               setEditMode(true);
             }}
           />

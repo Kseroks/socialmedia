@@ -1,6 +1,6 @@
-
 import { instance, APIResponseType } from "./api";
 import { UserType } from "../types/types";
+
 
 export type GetItemsType = {
 	items: Array<UserType>

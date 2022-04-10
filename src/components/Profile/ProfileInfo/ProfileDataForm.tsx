@@ -1,98 +1,79 @@
-import React from "react"
-import { Formik } from 'formik';
+import React from "react";
+import { Formik, Form, Field } from "formik";
+import { useDispatch } from "react-redux";
 import { SaveProfileTc } from "../../../redux/profile-reducer";
+import "./ProfileInfo.module.css";
 
-const ProfileDataForm: React.FC<any> = ({profile, toEditMode }) => {
+export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
+  const dispatch = useDispatch();
+  return (
+    <Formik
+      initialValues={profile}
+      onSubmit={(values, { setSubmitting }) => {
+        dispatch(SaveProfileTc(values));
+        toEditMode(false);
+        setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <label>
+            FullName
+            <Field type={`text`} name={"fullName"} placeholder="FullName" />
+          </label>
 
+          <label>
+            lookingForAJob
+            <Field
+              type={`checkbox`}
+              name={"lookingForAJob"}
+              placeholder="lookingForAJob"
+            />
+          </label>
 
-	return (
-		<Formik
-			initialValues={profile}
-			onSubmit={(values) => {
-				SaveProfileTc(values);
-				toEditMode(false);
-			}}
-		>
-			{({ values, handleChange, handleBlur }) => (
-				<div>
-					<br />
-					<div>
-						<label htmlFor={"fullName"}><b>FullName</b> </label>
-						<input
-							type={`text`}
-							name={"fullName"}
-							value={values.fullName}
-							placeholder="FullName"
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</div>
-					<br />
+          <label>
+            lookingForAJobDescription
+            <Field
+              type={`text`}
+              name={"lookingForAJobDescription"}
+              placeholder="lookingForAJobDescription"
+            />
+          </label>
 
-					<div>
-						<label htmlFor={"lookingForAJob"}><b>lookingForAJob</b> </label>
-						<input
-							type={`checkbox`}
-							name={"lookingForAJob"}
-							value={values.lookingForAJob}
-							placeholder="lookingForAJob"
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</div>
-					<br />
+          <label>
+            aboutMe
+            <Field
+              type={`text`}
+              name={"aboutMe"}
+              placeholder="lookingForAJob"
+            />
+          </label>
 
-					<div>
-						<div>
-							<label htmlFor={"lookingForAJobDescription"}><b>lookingForAJobDescription</b> </label>
-							<div>
-								<br />
-								<textarea
-									name={"lookingForAJobDescription"}
-									value={values.lookingForAJobDescription}
-									placeholder="lookingForAJobDescription"
-									onChange={handleChange}
-									onBlur={handleBlur}
-								/>
-							</div>
-						</div>
-					</div>
-					<br />
-					<div>
-						<div>
-							<label htmlFor={"aboutMe"}><b>aboutMe</b> </label>
-							<div>
-								<textarea
-									name={"aboutMe"}
-									value={values.aboutMe}
-									placeholder="aboutMe"
-									onChange={handleChange}
-									onBlur={handleBlur}
-								/>
-							</div>
-						</div>
-					</div>
-					<br />
-					<div>
-						<label htmlFor={"contacts"}>
-							<b>contacts :
-								{Object.keys(profile.contacts).map(key => {
-									return (<div key={key}><b>{key}:</b>
-										<input
-											type="text"
-											name={`"contacts".${key}`}
-											placeholder={key}
-										/></div>)
-								})}</b> </label>
-					</div>
-					<div><button
-						type={"submit"}
-					>Save</button></div>
-				</div>
+          <label>
+            <b>
+              contacts
+              {Object.keys(profile.contacts).map((key) => {
+                return (
+                  <div key={key}>
+                    <b>{key}:</b>
+                    <Field
+                      type={`text`}
+                      name={`"contacts".${key}`}
+                      placeholder={key}
+                    />
+                  </div>
+                );
+              })}
+            </b>
+          </label>
 
-			)}
-		</Formik>
-	)
-}
-
-export default ProfileDataForm;
+          <div>
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  );
+};

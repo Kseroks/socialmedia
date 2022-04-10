@@ -1,25 +1,29 @@
-import React from 'react'
-import { Formik } from 'formik';
+import React from "react";
+import { Formik, Form, Field } from "formik";
 
-interface PropsType  {
-  onAddPost: (newMessageBody: string) => void
-} 
+interface PropsType {
+  onAddPost: (values: string) => void;
+}
 
-const AddNewPostForm: React.FC<PropsType>= (props) => {
+export const AddNewPostForm: React.FC<PropsType> = (props) => {
   return (
     <div>
-      <Formik initialValues={{ text: "" }} onSubmit={(values) => { props.onAddPost(values.text) }}>
-        {({ values,handleChange }) => (
-          <div>
-            <p>
-              <input onChange={handleChange} type={`text`} name={"text"} value={values.text} />
-            </p>
-            <button type={"submit"}>Send</button>
-          </div>
+      <Formik
+        initialValues={{ post: "" }}
+        onSubmit={(values, { setSubmitting }) => {
+          props.onAddPost(values.post);
+          setSubmitting(false);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <Field type="text" name="post" />
+            <button type="submit" disabled={isSubmitting}>
+              Submit
+            </button>
+          </Form>
         )}
       </Formik>
     </div>
-  )
-}
-
-export default AddNewPostForm;
+  );
+};

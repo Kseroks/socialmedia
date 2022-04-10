@@ -1,8 +1,7 @@
-
 import { instance } from "./api";
-type GetCaptchaUrlResponseType = {
-	url: string
-}
+
+type GetCaptchaUrlResponseType = {url: string}
+
 
 export const SecurityApi = {
 	async getCaptchaUrl() {

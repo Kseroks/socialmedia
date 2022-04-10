@@ -1,30 +1,27 @@
-import React from "react";
-import s from "./MyPosts.module.css";
-import Post from "./Post/Post";
-import AddNewPostForm from "./AddNewPostForm";
-import { PostType } from "../../../types/types";
+import { useSelector, useDispatch } from "react-redux";
+import { getPostsSel } from "../../../redux/profile-selectors";
+import { AddNewPostForm } from "./AddNewPostForm";
 import { actions } from "../../../redux/profile-reducer";
+import { Post } from "./Post/Post";
+import s from "./MyPosts.module.css";
 
-interface PropsType {
-  posts: Array<PostType>;
-}
+export const MyPost = () => {
+  const posts = useSelector(getPostsSel);
+  const dispatch = useDispatch();
 
-const MyPost: React.FC<PropsType> = (props) => {
-  const postElement = props.posts.map((post, i) => {
+  const postElement = posts.map((post, i) => {
     return <Post key={i} message={post.message} likesCount={post.likesCount} />;
   });
 
-  const onAddPost = (values: any) => {
-    actions.AddPostAc(values.newPostText);
+  const onAddPost = (values: string) => {
+    dispatch(actions.AddPostAc(values));
   };
 
   return (
     <div className={s.postsBlock}>
-      My posts
+      <h3>My posts</h3>
       <AddNewPostForm onAddPost={onAddPost} />
       <div className={s.post}>{postElement}</div>
     </div>
   );
 };
-
-export default MyPost;

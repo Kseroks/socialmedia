@@ -1,15 +1,15 @@
 import React from "react";
-import s from "./Users.module.css";
-import avatar from "../../assets/photos/avatar.jpg";
 import { NavLink } from "react-router-dom";
 import { UserType } from "../../types/types";
+import avatar from "../../assets/photos/avatar.jpg";
+import s from "./Users.module.css";
 
-interface PropsType  {
+interface PropsType {
   user: UserType;
   followingInProgress: Array<number>;
   UnFollowTc: (userId: number) => void;
   FollowTc: (userId: number) => void;
-};
+}
 
 const User: React.FC<PropsType> = ({
   followingInProgress,
@@ -58,8 +58,8 @@ const User: React.FC<PropsType> = ({
           <div>{user.status}</div>
         </span>
         <span>
-          {/* <div>{user.location.country}</div> */}
-          {/* <div>{user.location.city}</div> */}
+          <div>{"user.location.country"}</div>
+          <div>{"user.location.city"}</div>
         </span>
       </span>
     </div>

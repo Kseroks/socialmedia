@@ -68,12 +68,10 @@ export const actions = {
 export const ProfileTc = (userID: number): ThunkType => async (dispatch) => {
 	let data = await ProfileApi.getUsers(userID);
 	dispatch(actions.SetUserProfileAc(data));
-	debugger;
 }
 export const GetStatusTc = (userID: number): ThunkType => async (dispatch) => {
 	let data = await ProfileApi.getUsersStatus(userID);
 	dispatch(actions.SetUserStatusAc(data));
-	debugger;
 
 }
 export const UpDateStatusTc = (status: string): ThunkType => async (dispatch) => {

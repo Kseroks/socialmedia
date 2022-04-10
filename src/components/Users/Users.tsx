@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import Paginator from "../common/Paginator/Paginator";
-import User from "./User";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getTotalUsersCountSel,
@@ -9,12 +7,14 @@ import {
   getUsersSel,
   getFollowingInProgressSel,
 } from "../../redux/users-selectors";
-import { GetUsersTc } from "../../redux/users-reducer";
-import { UnFollowTc, FollowTc } from "../../redux/users-reducer";
+import { UnFollowTc, FollowTc,GetUsersTc } from "../../redux/users-reducer";
+import {Paginator} from "../common/Paginator/Paginator";
+import User from "./User";
+
+
 // useEffect масив "пуста зависимость" означає коли компонента вмонтуєтся
 
 export const Users = () => {
-
   const totalUsersCount = useSelector(getTotalUsersCountSel);
   const currentPage = useSelector(getCurrentPageSel);
   const pageSize = useSelector(getPageSizeSel);
@@ -22,11 +22,9 @@ export const Users = () => {
   const followingInProgress = useSelector(getFollowingInProgressSel);
   const dispatch = useDispatch();
 
-
-
   useEffect(() => {
     dispatch(GetUsersTc(currentPage, pageSize));
-  }, [currentPage, dispatch, pageSize,]);
+  }, [currentPage, dispatch, pageSize]);
 
   const onPostChanged = (pageNumber: number) => {
     dispatch(GetUsersTc(pageNumber, pageSize));
@@ -39,11 +37,9 @@ export const Users = () => {
   const UnFollowTc1 = (userId: number) => {
     dispatch(UnFollowTc(userId));
   };
-  
 
   return (
     <div>
-      <>        
       <Paginator
         totalItemsCount={totalUsersCount}
         pageSize={pageSize}
@@ -60,9 +56,6 @@ export const Users = () => {
           FollowTc={FollowTc1}
         />
       ))}
-        
-        </>
     </div>
-    
   );
 };

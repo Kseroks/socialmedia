@@ -1,4 +1,3 @@
-
 import {useDispatch,useSelector} from "react-redux";
 import {getDialogsPageSel} from "../../redux/dialogs-selectors";
 import { actions } from "../../redux/dialogs-reducer";
@@ -30,8 +29,7 @@ export const Dialogs = () => {
 				<div className={s.dialogsItem}>{dialogElement}</div>
 				<div className={s.messages}>
 					<div>{messageElement}</div>
-					<DialogsMessage addNewMessage={addNewMessage}
-					/>
+					<DialogsMessage addNewMessage={addNewMessage}/>
 				</div>
 			</div>
 		</>

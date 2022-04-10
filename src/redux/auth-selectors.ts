@@ -11,3 +11,7 @@ export const getCaptchaUrlSel = (state: AppStateType) => {
 export const authorizedUserIdSel = (state: AppStateType) => {
 	return state.auth.userId;
 }
+
+export const getLoginSel = (state: AppStateType) => {
+	return state.auth.login;
+}

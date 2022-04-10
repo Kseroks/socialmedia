@@ -1,13 +1,12 @@
 import { instance, APIResponseType, ResultCodesEnum } from "./api";
 
-type MeResponseDataType = {
+interface MeResponseDataType {
 	id: number
 	email: string
 	login: string
 }
-type LoginResponseDataType = {
-	userId: number
-}
+
+interface LoginResponseDataType {userId: number}
 
 export const HeaderApi = {
 	async getUsers() {

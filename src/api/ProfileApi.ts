@@ -1,10 +1,7 @@
 import { instance, APIResponseType } from "./api";
-
 import { PhotosType, ProfileType } from '../types/types';
 
-type SavePhotoResponseDataType = {
-	photos: PhotosType
-}
+type SavePhotoResponseDataType = { photos: PhotosType }
 
 export const ProfileApi = {
 	async getUsers(userId: number) {
@@ -33,5 +30,4 @@ export const ProfileApi = {
 		const res = await instance.put<APIResponseType>(`profile`, profile);
 		return res.data;
 	}
-}
-
+};
