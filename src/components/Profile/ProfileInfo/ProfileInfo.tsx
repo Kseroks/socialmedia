@@ -5,18 +5,17 @@ import { ProfileDataForm } from "./ProfileDataForm";
 import { ProfileData } from "./ProfileData";
 import { ProfileStatus } from "./ProfileStatus";
 import { Preloader } from "../../common/Preloader/Preloader";
-import { getStatusSel, getProfileSel } from "../../../redux/profile-selectors";
+import {selectors} from "../../../selectors/profile-selectors";
 import avatar from "../../../assets/photos/avatar.jpg";
 import s from "./ProfileInfo.module.css";
-
 
 
 
 export const ProfileInfo:FC<any> = ({ isOwner }) => {
 
   const [editMode, setEditMode] = useState<any>(false);
-  const status = useSelector(getStatusSel);
-  const profile = useSelector(getProfileSel);
+  const status = useSelector(selectors.getStatusSel);
+  const profile = useSelector(selectors.getProfileSel);
   const dispatch = useDispatch();
 
   if (!profile) {

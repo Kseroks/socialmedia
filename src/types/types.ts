@@ -1,9 +1,9 @@
-export type PostType = {
+export interface PostType {
 	id: number
 	message: string
 	likesCount: number
 }
-export type ContactsType = {
+export interface ContactsType {
 	facebook: string
 	website: string
 	vk: string
@@ -13,11 +13,11 @@ export type ContactsType = {
 	github: string
 	mainLink: string
 }
-export type PhotosType = {
+export interface PhotosType {
 	small: string | null
 	large: string | null
 }
-export type ProfileType = {
+export interface ProfileType {
 	userId: number,
 	lookingForAJob: boolean
 	lookingForAJobDescription: string
@@ -26,7 +26,7 @@ export type ProfileType = {
 	contacts: ContactsType
 	photos: PhotosType
 }
-export type UserType = {
+export interface UserType {
 	id: number
 	name: string
 	status: string
@@ -34,12 +34,13 @@ export type UserType = {
 	followed: boolean
 }
 
-export type DialogsType = {
+export interface DialogsType {
 	id: number,
 	name: string,
 }
 
-export type MessagesType = {
+export interface MessagesType {
 	id: number,
 	message: string,
 }
+

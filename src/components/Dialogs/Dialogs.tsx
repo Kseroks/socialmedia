@@ -1,5 +1,5 @@
 import {useDispatch,useSelector} from "react-redux";
-import {getDialogsPageSel} from "../../redux/dialogs-selectors";
+import {selectors} from "../../selectors/dialogs-selectors";
 import { actions } from "../../redux/dialogs-reducer";
 import {DialogsMessage} from "../Dialogs/DialogsMessage";
 import {DialogItem} from "./DialogItem//DialogItem";
@@ -8,7 +8,7 @@ import s from "./Dialogs.module.css";
 
 export const Dialogs = () => {
 
-	const dialogsPage = useSelector(getDialogsPageSel);
+	const dialogsPage = useSelector(selectors.getDialogsPageSel);
 	const dispatch = useDispatch();
 
 	const dialogElement = dialogsPage.dialogs.map((dialog, i) => {

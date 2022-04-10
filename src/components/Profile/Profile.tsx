@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useMatch } from "react-router-dom";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { MyPost } from "./MyPosts/MyPosts";
-import { authorizedUserIdSel } from "../../redux/auth-selectors";
+import { selectors } from "../../selectors/auth-selectors";
 import { ProfileTc, GetStatusTc } from "../../redux/profile-reducer";
 
 export const Profile: FC<any> = () => {
-  const authorizedUserId: any = useSelector(authorizedUserIdSel);
+  const authorizedUserId: any = useSelector(selectors.authorizedUserIdSel);
   const dispatch = useDispatch();
   const match = useMatch("/profile/:userId/");
 

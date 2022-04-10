@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { getPostsSel } from "../../../redux/profile-selectors";
+import { selectors } from "../../../selectors/profile-selectors";
 import { AddNewPostForm } from "./AddNewPostForm";
 import { actions } from "../../../redux/profile-reducer";
 import { Post } from "./Post/Post";
 import s from "./MyPosts.module.css";
 
 export const MyPost = () => {
-  const posts = useSelector(getPostsSel);
+  const posts = useSelector(selectors.getPostsSel);
   const dispatch = useDispatch();
 
   const postElement = posts.map((post, i) => {

@@ -1,12 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getTotalUsersCountSel,
-  getCurrentPageSel,
-  getPageSizeSel,
-  getUsersSel,
-  getFollowingInProgressSel,
-} from "../../redux/users-selectors";
+import {selectors} from "../../selectors/users-selectors";
 import { UnFollowTc, FollowTc,GetUsersTc } from "../../redux/users-reducer";
 import {Paginator} from "../common/Paginator/Paginator";
 import User from "./User";
@@ -15,11 +9,11 @@ import User from "./User";
 // useEffect масив "пуста зависимость" означає коли компонента вмонтуєтся
 
 export const Users = () => {
-  const totalUsersCount = useSelector(getTotalUsersCountSel);
-  const currentPage = useSelector(getCurrentPageSel);
-  const pageSize = useSelector(getPageSizeSel);
-  const users = useSelector(getUsersSel);
-  const followingInProgress = useSelector(getFollowingInProgressSel);
+  const totalUsersCount = useSelector(selectors.getTotalUsersCountSel);
+  const currentPage = useSelector(selectors.getCurrentPageSel);
+  const pageSize = useSelector(selectors.getPageSizeSel);
+  const users = useSelector(selectors.getUsersSel);
+  const followingInProgress = useSelector(selectors.getFollowingInProgressSel);
   const dispatch = useDispatch();
 
   useEffect(() => {

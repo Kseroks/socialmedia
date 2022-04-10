@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { getLoginSel, getIsAuthSel } from "../../redux/auth-selectors";
+import { selectors} from "../../selectors/auth-selectors";
 import { LogOutTc } from "../../redux/auth-reducer";
 import s from "./Header.module.css";
 
 export const Header: React.FC<any> = () => {
-  const isAuth = useSelector(getIsAuthSel);
-  const login = useSelector(getLoginSel);
+  const isAuth = useSelector(selectors.getIsAuthSel);
+  const login = useSelector(selectors.getLoginSel);
   const dispatch = useDispatch();
 
   const logOut = () => {

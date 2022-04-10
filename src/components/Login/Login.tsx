@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 import {connect, useSelector } from "react-redux";
 import { LoginTc } from "../../redux/auth-reducer";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { getIsAuthSel, getCaptchaUrlSel } from "../../redux/auth-selectors";
+import {selectors} from "../../selectors/auth-selectors";
 import s from "./Login.module.css";
 
 
 const Login: React.FC<any> = ({LoginTc}) => {
-  const isAuth = useSelector(getIsAuthSel);
-  const captchaUrl = useSelector(getCaptchaUrlSel);
+  const isAuth = useSelector(selectors.getIsAuthSel);
+  const captchaUrl = useSelector(selectors.getCaptchaUrlSel);
 
   if (isAuth) {
     return <NavLink to="/profile"></NavLink>;
