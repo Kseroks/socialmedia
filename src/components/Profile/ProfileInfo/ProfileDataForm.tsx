@@ -10,6 +10,7 @@ export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
     <Formik
       initialValues={profile}
       onSubmit={(values, { setSubmitting }) => {
+        debugger;
         dispatch(SaveProfileTc(values));
         toEditMode(false);
         setSubmitting(false);

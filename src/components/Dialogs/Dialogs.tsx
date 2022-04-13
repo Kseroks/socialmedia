@@ -5,8 +5,10 @@ import {DialogsMessage} from "../Dialogs/DialogsMessage";
 import {DialogItem} from "./DialogItem//DialogItem";
 import {Message} from "./Message/Message";
 import s from "./Dialogs.module.css";
+import { compose } from 'redux';
+import WithAuthRedirect from '../../hoc/WithAuthRedirect';
 
-export const Dialogs = () => {
+const Dialogs = () => {
 
 	const dialogsPage = useSelector(selectors.getDialogsPageSel);
 	const dispatch = useDispatch();
@@ -35,3 +37,8 @@ export const Dialogs = () => {
 		</>
 	)
 };
+
+
+export default compose<React.ComponentType>(
+    WithAuthRedirect
+)(Dialogs)

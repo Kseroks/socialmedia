@@ -1,20 +1,17 @@
 import React from "react";
 import * as yup from "yup";
-import { NavLink } from "react-router-dom";
-import {connect, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LoginTc } from "../../redux/auth-reducer";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {selectors} from "../../selectors/auth-selectors";
 import s from "./Login.module.css";
 
 
-const Login: React.FC<any> = ({LoginTc}) => {
-  const isAuth = useSelector(selectors.getIsAuthSel);
-  const captchaUrl = useSelector(selectors.getCaptchaUrlSel);
+export const Login: React.FC<any> = () => {
 
-  if (isAuth) {
-    return <NavLink to="/profile"></NavLink>;
-  }
+  const captchaUrl = useSelector(selectors.getCaptchaUrlSel);
+  const dispatch = useDispatch();
 
   const validationSchemes = yup.object().shape({
     password: yup
@@ -32,13 +29,13 @@ const Login: React.FC<any> = ({LoginTc}) => {
       initialValues={{ email: "", password: "", rememberMe: false, captcha: "" }}
       validationSchema={validationSchemes}
       onSubmit={(values, { setSubmitting, setStatus}) => {
-        LoginTc(
+        dispatch(LoginTc(
           values.email,
           values.password,
           values.rememberMe,
           setStatus,
           values.captcha
-        );
+        ));
         setSubmitting(false);
       }}
     >
@@ -90,6 +87,3 @@ const Login: React.FC<any> = ({LoginTc}) => {
     </Formik>
   );
 };
-
-
-export default connect(null, { LoginTc })(Login);

@@ -1,23 +1,20 @@
-import React from 'react'
+import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "../components/Login/Login";
+import { Login } from "../components/Login/Login";
 import { connect } from "react-redux";
-import { AppStateType } from '../redux/redux-store';
+import { AppStateType } from "../redux/redux-store";
 
-
-let mapStateToPropsForRedirect = (state: AppStateType) => ({
-    isAuth: state.auth.isAuth
-} as MapPropsType);
+let mapStateToPropsForRedirect = (state: AppStateType) =>
+  ({
+    isAuth: state.auth.isAuth,
+  } as MapPropsType);
 
 type MapPropsType = {
-    isAuth: boolean
-}
-type DispatchPropsType = {
-}
+  isAuth: boolean;
+};
+type DispatchPropsType = {};
 
-function withAuthRedirect<WCP>(
-  WrappedComponent: React.ComponentType<WCP>
-) {
+function withAuthRedirect<WCP>(WrappedComponent: React.ComponentType<WCP>) {
   const RedirectComponent: React.FC<MapPropsType & DispatchPropsType> = (
     props
   ) => {
@@ -48,3 +45,6 @@ function withAuthRedirect<WCP>(
 }
 
 export default withAuthRedirect;
+
+
+// Потім незабути зробити нормальний редірект!!!!!!!
