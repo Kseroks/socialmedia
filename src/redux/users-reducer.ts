@@ -4,6 +4,7 @@ import { BaseThunkType, InferActionsTypes } from "./redux-store";
 
 // Types
 export type initialStateType = typeof initialState;
+export type filterType = typeof initialState.filter;
 type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes>;
 
@@ -14,6 +15,10 @@ let initialState = {
   currentPage: 1 as number,
   isFetching: true as boolean,
   followingInProgress: [] as Array<number>, // array of userId
+  filter: {
+    term: "",
+    friend: null as null | boolean,
+  }
 };
 
 const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -59,6 +64,9 @@ const usersReducer = (state: initialStateType = initialState, action: ActionsTyp
           : state.followingInProgress.filter((id) => id !== action.userId),
       };
     }
+    case "SET_FILTER": {
+      return { ...state, filter: action.payload }
+    }
     default:
       return state;
   }
@@ -73,14 +81,17 @@ export const actions = {
   SetTotalUsersCountAc: (totalCount: number) => ({ type: "SET_TOTAL_USERS_COUNT", totalCount } as const),
   ToggleIsFetchingAc: (isFetching: boolean) => ({ type: "TOGGLE_IS_FETCHING", isFetching } as const),
   ToggleFollowingProgressAc: (isFetching: boolean, userID: number) => ({ type: "TOGGLE_IS_FOLLOWING_PROGRESS", isFetching, userId: userID, } as const),
+  setFilter: (filter: filterType) => ({
+    type: "SET_FILTER", payload: filter} as const),
 };
 
 // Thunk Creators
 export const GetUsersTc =
-  (currentPage: number, pageSize: number): ThunkType =>
+  (currentPage: number, pageSize: number, filter: filterType): ThunkType =>
     async (dispatch) => {
       dispatch(actions.ToggleIsFetchingAc(true));
-      let data = await UsersApi.getUsers(currentPage, pageSize);
+      dispatch(actions.setFilter(filter));
+      let data = await UsersApi.getUsers(currentPage, pageSize, filter.term,filter.friend);
       dispatch(actions.ToggleIsFetchingAc(false));
       dispatch(actions.SetUsersAc(data.items));
       dispatch(actions.SetTotalUsersCountAc(data.totalCount));
@@ -95,7 +106,7 @@ export const FollowTc =
         dispatch(actions.FollowAc(userID));
       }
       dispatch(actions.ToggleFollowingProgressAc(false, userID));
-  
+
     };
 
 export const UnFollowTc =

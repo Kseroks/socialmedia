@@ -1,15 +1,11 @@
-import { instance, APIResponseType } from "./api";
-import { UserType } from "../types/types";
+import { instance, APIResponseType, GetItemsType } from "./api";
 
-export type GetItemsType = {
-  items: Array<UserType>;
-  totalCount: number;
-};
+
 
 export const UsersApi = {
-  async getUsers(currentPage: number, pageSize: number) {
+  async getUsers(currentPage: number, pageSize: number, term: string = "", friend: null | boolean = null,) {
     const res = await instance.get<GetItemsType>(
-      `users?page=${currentPage}&count=${pageSize}`
+      `users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`)
     );
     return res.data;
   },

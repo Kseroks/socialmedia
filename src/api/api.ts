@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserType } from "../types/types";
 
 // Настройка запроса
 export const instance = axios.create({
@@ -21,3 +22,9 @@ export type APIResponseType<D = {}, RC = ResultCodesEnum> = {
 	messages: Array<string>
 	resultCode: RC
 }
+
+
+export interface GetItemsType {
+	items: Array<UserType>;
+	totalCount: number;
+};

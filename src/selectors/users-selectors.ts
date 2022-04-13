@@ -11,12 +11,12 @@ export const selectors = {
 
   getTotalUsersCountSel: (state: AppStateType) => {
     return state.usersPage.totalUsersCount;
-	},
-	
+  },
+
   getCurrentPageSel: (state: AppStateType) => {
     return state.usersPage.currentPage;
-	},
-	
+  },
+
   getIsFetchingSel: (state: AppStateType) => {
     return state.usersPage.isFetching;
   },
@@ -28,4 +28,7 @@ export const selectors = {
   getIsAuthSel: (state: AppStateType) => {
     return state.auth.isAuth;
   },
+  getFilterSel: (state: AppStateType) => {
+    return state.usersPage.filter;
+  }
 };
