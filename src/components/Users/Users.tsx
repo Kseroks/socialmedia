@@ -9,6 +9,7 @@ import User from "./User";
 // useEffect масив "пуста зависимость" означає коли компонента вмонтуєтся
 
 export const Users = () => {
+  
   const totalUsersCount = useSelector(selectors.getTotalUsersCountSel);
   const currentPage = useSelector(selectors.getCurrentPageSel);
   const pageSize = useSelector(selectors.getPageSizeSel);

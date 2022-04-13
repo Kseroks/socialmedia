@@ -33,12 +33,10 @@ export interface UserType {
 	photos: PhotosType
 	followed: boolean
 }
-
 export interface DialogsType {
 	id: number,
 	name: string,
 }
-
 export interface MessagesType {
 	id: number,
 	message: string,

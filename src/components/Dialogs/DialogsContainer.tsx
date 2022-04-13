@@ -1,14 +1,14 @@
 import {useDispatch,useSelector} from "react-redux";
+import { compose } from 'redux';
 import {selectors} from "../../selectors/dialogs-selectors";
 import { actions } from "../../redux/dialogs-reducer";
-import {DialogsMessage} from "../Dialogs/DialogsMessage";
-import {DialogItem} from "./DialogItem//DialogItem";
+import {DialogsMessage} from "./DialogsMessage";
+import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import s from "./Dialogs.module.css";
-import { compose } from 'redux';
 import WithAuthRedirect from '../../hoc/WithAuthRedirect';
+import s from "./Dialogs.module.css";
 
-const Dialogs = () => {
+const DialogsContainer = () => {
 
 	const dialogsPage = useSelector(selectors.getDialogsPageSel);
 	const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const Dialogs = () => {
 	}
 
 	return (
-		<>
 			<div className={s.dialogs}>
 				<div className={s.dialogsItem}>{dialogElement}</div>
 				<div className={s.messages}>
@@ -34,11 +33,8 @@ const Dialogs = () => {
 					<DialogsMessage addNewMessage={addNewMessage}/>
 				</div>
 			</div>
-		</>
 	)
 };
 
 
-export default compose<React.ComponentType>(
-    WithAuthRedirect
-)(Dialogs)
+export default compose(WithAuthRedirect)(DialogsContainer);

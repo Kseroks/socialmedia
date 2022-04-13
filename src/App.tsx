@@ -5,9 +5,9 @@ import { HeaderTc } from "./redux/auth-reducer";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Login } from "./components/Login/Login";
 import { Header } from "./components/Header/Header";
-import  UsersContainer  from "./components/Users/UsersContainer";
-import  Dialogs  from "./components/Dialogs/Dialogs";
-import  Profile  from "./components/Profile/Profile";
+import UsersContainer from "./components/Users/UsersContainer";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 import "./App.css";
 
 export const App = () => {
@@ -24,10 +24,10 @@ export const App = () => {
         <NavBar />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/dialogs/*" element={<Dialogs />} />
-            <Route path="/profile/*" element={<Profile />} />
-            <Route path="/profile/:userId" element={<Profile />} />
-            <Route path="/users/*" element={<UsersContainer />}/>
+            <Route path="/dialogs/*" element={<DialogsContainer />} />
+            <Route path="/profile/*" element={<ProfileContainer />} />
+            <Route path="/profile/:userId" element={<ProfileContainer />} />
+            <Route path="/users/*" element={<UsersContainer />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>

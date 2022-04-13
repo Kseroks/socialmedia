@@ -9,13 +9,12 @@ import { ProfileTc, GetStatusTc } from "../../redux/profile-reducer";
 import  WithAuthRedirect  from "../../hoc/WithAuthRedirect";
 
 
-const Profile: FC<any> = () => {
+const ProfileContainer: FC<any> = () => {
   const dispatch = useDispatch();
   const match = useMatch("/profile/:userId/");
   const authorizedUserId: any = useSelector(selectors.authorizedUserIdSel);
 
   useEffect(() => {
-
     let userId = match ? match.params.userId : authorizedUserId;
     dispatch(ProfileTc(userId));
     dispatch(GetStatusTc(userId));
@@ -29,4 +28,4 @@ const Profile: FC<any> = () => {
   );
 };
 
-export default compose<React.ComponentType>(WithAuthRedirect)(Profile);
+export default compose(WithAuthRedirect)(ProfileContainer);

@@ -37,9 +37,7 @@ const authReducer = (state: initialStateType = initialState, action: ActionsType
   }
 };
 
-
 // ACTION CREATORS
-
 export const actions = {
   getCaptchaUrlAc: (captchaUrl: string) => ({
     type: "GET_CAPTCHA_URL",
