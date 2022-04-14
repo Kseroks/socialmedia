@@ -1,19 +1,23 @@
+import { Avatar, Button } from "antd";
 import React from "react";
-import avatar from "../../../../assets/photos/avatar.jpg";
 import s from "./Post.module.css";
-
+import { UserOutlined } from "@ant-design/icons";
 interface PropsType {
   message: string;
   likesCount: number;
 }
 
-export const Post: React.FC<PropsType> = (props) => {
+export const Post: React.FC<PropsType> = ({ message, likesCount }) => {
   return (
     <div className={s.item}>
-      <img src={avatar} alt="222"></img>
-      {props.message}
       <div>
-        <span>Like {props.likesCount}</span>
+        <Avatar size={50} icon={<UserOutlined />} />
+      </div>
+      <div className={s.textPost}>
+        <h4>{message}</h4>
+        <p>
+          <Button>Like</Button> {likesCount}
+        </p>
       </div>
     </div>
   );

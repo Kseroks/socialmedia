@@ -1,36 +1,71 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { selectors} from "../../selectors/auth-selectors";
+import { Link } from "react-router-dom";
+import { selectors } from "../../selectors/auth-selectors";
 import { LogOutTc } from "../../redux/auth-reducer";
 import s from "./Header.module.css";
 
+import { Layout, Avatar, Row, Col, Button, Typography } from "antd";
+
+import { UserOutlined } from "@ant-design/icons";
+
 export const Header: React.FC<any> = () => {
+  const { Header } = Layout;
+  const { Text } = Typography;
+
   const isAuth = useSelector(selectors.getIsAuthSel);
   const login = useSelector(selectors.getLoginSel);
   const dispatch = useDispatch();
 
-  const logOut = () => {
-    dispatch(LogOutTc());
-  };
+  const logOut = () => {dispatch(LogOutTc());};
 
   return (
-    <header className={s.header}>
-      <img
-        src="https://w7.pngwing.com/pngs/803/598/png-transparent-phoenix-logo-phoenix-red-bird-illustration-leaf-photography-mirror.png"
-        alt="Logo"
-      ></img>
-
-      <div className={s.loginBlock}>
-        {isAuth ? (
-          <div>
-            {login}
-            <button onClick={logOut}>Log Out</button>
-          </div>
-        ) : (
-          <NavLink to={"/login"}>Login</NavLink>
-        )}
-      </div>
-    </header>
+    <>
+      <Header className="header">
+        <div className="logo" />
+        <Row>
+          <Col span={20}>
+            <img
+              className={s.logo}
+              src="https://w7.pngwing.com/pngs/803/598/png-transparent-phoenix-logo-phoenix-red-bird-illustration-leaf-photography-mirror.png"
+              alt="Logo"
+            ></img>
+          </Col>
+          <Col span={4}>
+            <Avatar  size={40} icon={<UserOutlined />} />
+            {isAuth ? (
+              <>
+                <Text type="warning">{login} </Text>
+                <Button onClick={logOut} ghost>
+                  Log Out
+                </Button>
+              </>
+            ) : (
+              <Button ghost>
+                <Link to={"/login"}>Login</Link>
+              </Button>
+            )}
+          </Col>
+        </Row>
+      </Header>
+    </>
   );
 };
+
+// <header className={s.header}>
+//         <img
+//           src="https://w7.pngwing.com/pngs/803/598/png-transparent-phoenix-logo-phoenix-red-bird-illustration-leaf-photography-mirror.png"
+//           alt="Logo"
+//         ></img>
+
+//         <div className={s.loginBlock}>
+//           {isAuth ? (
+//             <div>
+//               {login}
+//               <button onClick={logOut}>Log Out</button>
+//             </div>
+//           ) : (
+//             <Link to={"/login"}>Login</Link>
+//           )}
+//         </div>
+//       </header>

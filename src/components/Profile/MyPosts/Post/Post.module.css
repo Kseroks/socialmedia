@@ -1,7 +1,8 @@
 .item {
-  color: greenyellow;
+  width: 220px;
+  display: flex;
+  margin-top: 20px;
 }
-.item img {
-  width: 50px;
-  border-radius: 50%;
+.textPost{
+  margin-left: 10px;
 }

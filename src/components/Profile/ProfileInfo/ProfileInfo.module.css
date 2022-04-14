@@ -10,3 +10,9 @@ label {
   display: block;
   padding: 5px;
 }
+.pd {
+  margin-top: 5px;
+}
+.status {
+  margin: 5px;
+}

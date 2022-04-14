@@ -13,7 +13,6 @@ export const SearchUsers: React.FC<PropsType>= ({onFilterChanged}) => {
     <Formik
       initialValues={{ term: "",friend: null }}
 			onSubmit={(values, { setSubmitting }) => {
-				console.log(values);
 				onFilterChanged(values);
         setSubmitting(false);
       }}

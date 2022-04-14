@@ -1,7 +1,7 @@
 import { useState, useEffect, FC } from "react";
 import { useDispatch } from "react-redux";
 import { UpDateStatusTc } from "../../../redux/profile-reducer";
-
+import { Input } from 'antd';
 interface TypeProps {PrevStatus: string;}
 
 export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
@@ -28,15 +28,16 @@ export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
   };
 
   return (
+    <>
     <div>
       {!editMode && (
         <div>
-          <span onDoubleClick={activatedEditMode}>{PrevStatus}</span>
+          <h2 onDoubleClick={activatedEditMode}>{PrevStatus}</h2>
         </div>
       )}
       {editMode && (
         <div>
-          <input
+          <Input
             onChange={onStatusChange}
             autoFocus={true}
             onBlur={deactivatedEditMode}
@@ -44,6 +45,7 @@ export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
           />
         </div>
       )}
-    </div>
+      </div>
+      </>
   );
 };

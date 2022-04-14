@@ -1,25 +1,25 @@
 import React from "react";
 import { Contact } from "./Contact";
-
+import { Button } from 'antd';
 export const ProfileData: React.FC<any> = ({ profile, isOwner, toEditMode }) => {
   return (
     <div>
-      <div>{isOwner && <button onClick={toEditMode}>edit</button>}</div>
-      <p>{profile.aboutMe}</p>
-      <p>Состояния роботи: {profile.lookingForAJob ? "Да" : "Нет"}</p>
-      <p>{profile.lookingForAJobDescription}</p>
+      <h3>Про Мене: {profile.aboutMe}</h3>
+      <h3>Состояния роботи: {profile.lookingForAJob ? "YES" : "NO"}</h3>
+      <h3>Skills: {profile.lookingForAJobDescription}</h3>
       <div>
-        Contacts:
-        {Object.keys(profile.contacts).map((key, j) => {
+        <h3>Contacts:</h3>
+        {Object.keys(profile.contacts).map((key) => {
           return (
             <Contact
-              key={j}
+              key={key}
               contactTitle={key}
               contactValue={profile.contacts[key]}
             />
           );
         })}
       </div>
+      <div>{isOwner && <Button onClick={toEditMode}>Edit</Button>}</div>
     </div>
   );
 };
