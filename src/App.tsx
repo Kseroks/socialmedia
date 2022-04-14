@@ -9,11 +9,10 @@ import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 
-
-// import "./App.css";
 import "antd/dist/antd.min.css";
 
 import { Layout} from "antd";
+import { ChatPage } from "./pages/Chat/ChatPage";
 
 
 export const App = () => {
@@ -43,6 +42,7 @@ export const App = () => {
                 <Route path="/profile/*" element={<ProfileContainer />} />
                 <Route path="/profile/:userId" element={<ProfileContainer />} />
                 <Route path="/users/*" element={<UsersContainer />} />
+                <Route path="/chat" element={<ChatPage />} />
                 <Route path="/login" element={<Login />} />
               </Routes>
             </Content>
