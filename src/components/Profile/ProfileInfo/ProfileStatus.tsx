@@ -1,7 +1,8 @@
 import { useState, useEffect, FC } from "react";
 import { useDispatch } from "react-redux";
-import { UpDateStatusTc } from "../../../redux/profile-reducer";
+import { thunks } from "../../../redux/profile-reducer";
 import { Input } from 'antd';
+
 interface TypeProps {PrevStatus: string;}
 
 export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
@@ -20,7 +21,7 @@ export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
 
   const deactivatedEditMode = () => {
     SetEditMode(false);
-    dispatch(UpDateStatusTc(status));
+    dispatch(thunks.UpDateStatusTc(status));
   };
 
   const onStatusChange = (event: any) => {

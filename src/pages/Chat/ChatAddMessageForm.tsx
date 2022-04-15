@@ -1,32 +1,38 @@
+import { useState } from "react";
 import { Button, Input } from "antd";
-import {websocket} from '../../api/ChatApi'
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectors } from "../../selectors/chat-selectors";
+import { thunks } from "../../redux/chat-reducer";
 
 export const ChatAddMessageForm = () => {
   const { TextArea } = Input;
 
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = useState("");
+  const dispatch = useDispatch();
 
+  const status = useSelector(selectors.getStatus);
 
-  const ChatSendMessage = () => {
-  
+  const sendMessageHandler = () => {
     if (!message) {
-      return
-    } 
-    websocket.send(message);
+      return;
+    }
+    dispatch(thunks.sendMessageTC(message));
+    setMessage("");
   };
 
   return (
-    <div style={{width: '300px'}}>
+    <div>
       <div>
-        <TextArea
-          rows={4}
-          onChange={(e) => { setMessage(e.currentTarget.value); }}
+        <TextArea rows={2}
+          onChange={(e) => setMessage(e.currentTarget.value)}
           value={message}
-        >
-        </TextArea>
+        ></TextArea>
       </div>
-			<Button type="ghost" onClick={ChatSendMessage} >Send</Button>
+      <div>
+        <Button type="ghost" disabled={status !== "ready"}
+          onClick={sendMessageHandler}>Send</Button>
+      </div>
     </div>
   );
 };
+

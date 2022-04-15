@@ -3,6 +3,7 @@ import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
+import chatReducer from "./chat-reducer";
 import thunk, { ThunkAction } from "redux-thunk";
 
 let reducers = combineReducers({
@@ -10,6 +11,7 @@ let reducers = combineReducers({
 	dialogsPage: dialogsReducer,
 	usersPage: usersReducer,
 	auth: authReducer,
+	chat: chatReducer,
 });
 
 

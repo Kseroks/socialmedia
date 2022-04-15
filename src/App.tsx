@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HeaderTc } from "./redux/auth-reducer";
+import { thunks } from "./redux/auth-reducer";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Login } from "./components/Login/Login";
 import { Header } from "./components/Header/Header";
@@ -20,7 +20,7 @@ export const App = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(HeaderTc());
+    dispatch(thunks.HeaderTc());
   }, [dispatch]);
 
   return (

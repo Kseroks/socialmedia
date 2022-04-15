@@ -51,38 +51,40 @@ export const actions = {
 }
 
 // THUNK CREATORS
-
-export const HeaderTc = (): ThunkType => async (dispatch) => {
-  const data = await HeaderApi.getUsers();
-  if (data.resultCode === ResultCodesEnum.Success) {
-    const { id, email, login } = data.data;
-    dispatch(actions.setAuthUserDataAc(id, email, login, true));
-  }
-};
-
-export const LoginTc = (email: string, password: string, rememberMe: boolean, setStatus: any, captcha: string): ThunkType => async (dispatch) => {
-  let data = await HeaderApi.login(email, password, rememberMe, captcha);
-  if (data.resultCode === ResultCodesEnum.Success) {
-    dispatch(HeaderTc());
-  } else {
-    if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
-      dispatch(getCaptchaUrlTc());
+export const thunks = {
+  HeaderTc : (): ThunkType => async (dispatch) => {
+    const data = await HeaderApi.getUsers();
+    if (data.resultCode === ResultCodesEnum.Success) {
+      const { id, email, login } = data.data;
+      dispatch(actions.setAuthUserDataAc(id, email, login, true));
     }
-    setStatus(data.messages);
-  }
-};
+  },
 
-export const LogOutTc = (): ThunkType => async (dispatch) => {
-  const response = await HeaderApi.logOut();
-  if (response.data.resultCode === ResultCodesEnum.Success) {
-    dispatch(actions.setAuthUserDataAc(null, null, null, false));
-  }
-};
+  LoginTc : (email: string, password: string, rememberMe: boolean, setStatus: any, captcha: string): ThunkType => async (dispatch) => {
+    let data = await HeaderApi.login(email, password, rememberMe, captcha);
+    if (data.resultCode === ResultCodesEnum.Success) {
+      dispatch(thunks.HeaderTc());
+    } else {
+      if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
+        dispatch(thunks.getCaptchaUrlTc());
+      }
+      setStatus(data.messages);
+    }
+  },
 
-export const getCaptchaUrlTc = (): ThunkType => async (dispatch) => {
-  const data = await SecurityApi.getCaptchaUrl();
-  const captchaUrl = data.url;
-  dispatch(actions.getCaptchaUrlAc(captchaUrl));
-};
+  LogOutTc : (): ThunkType => async (dispatch) => {
+    const response = await HeaderApi.logOut();
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+      dispatch(actions.setAuthUserDataAc(null, null, null, false));
+    }
+  },
+
+  getCaptchaUrlTc : (): ThunkType => async (dispatch) => {
+    const data = await SecurityApi.getCaptchaUrl();
+    const captchaUrl = data.url;
+    dispatch(actions.getCaptchaUrlAc(captchaUrl));
+  },
+}
+
 
 export default authReducer;

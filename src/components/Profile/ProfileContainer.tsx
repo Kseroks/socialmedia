@@ -5,7 +5,7 @@ import { useMatch } from "react-router-dom";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { MyPost } from "./MyPosts/MyPosts";
 import { selectors } from "../../selectors/auth-selectors";
-import { ProfileTc, GetStatusTc } from "../../redux/profile-reducer";
+import { thunks } from "../../redux/profile-reducer";
 import  WithAuthRedirect  from "../../hoc/WithAuthRedirect";
 
 
@@ -16,8 +16,8 @@ const ProfileContainer: FC<any> = () => {
 
   useEffect(() => {
     let userId = match ? match.params.userId : authorizedUserId;
-    dispatch(ProfileTc(userId));
-    dispatch(GetStatusTc(userId));
+    dispatch(thunks.ProfileTc(userId));
+    dispatch(thunks.GetStatusTc(userId));
   }, [authorizedUserId, dispatch, match]);
 
   return (

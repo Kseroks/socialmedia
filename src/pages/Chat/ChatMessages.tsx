@@ -1,27 +1,42 @@
-import React,{useEffect,useState} from 'react'
-import { ChatMessage } from './ChatMessage'
-import {websocket} from '../../api/ChatApi'
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectors } from "../../selectors/chat-selectors";
+import { Message } from "./Message";
 
-export const ChatMessages: React.FC<any>= () => {
+export const ChatMessages = () => {
 
-	const [message, setMessage] = useState<any>([]);
-	
+  const messages = useSelector(selectors.getMessages);
+  const messagesAnchorRef = useRef<HTMLDivElement>(null);
+  const [isAutoScroll, setIsAutoScroll] = useState(true);
 
+  const scrollHandler = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const element = e.currentTarget;
+    if (
+      Math.abs(
+        element.scrollHeight - element.scrollTop - element.clientHeight
+      ) < 300
+    ) {
+      !isAutoScroll && setIsAutoScroll(true);
+    } else {
+      isAutoScroll && setIsAutoScroll(false);
+    }
+  };
 
+  useEffect(() => {
+    if (isAutoScroll) {
+      messagesAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isAutoScroll, messages]);
 
-	useEffect(() => {
-
-		websocket.addEventListener("message", (e) => {
-			let newMessage = JSON.parse(e.data);
-			setMessage((prevMessage:any) => [...prevMessage, ...newMessage]);
-		})
-	},)
-
-	return (
-		<div style={{height:"400px",overflowY: 'auto'}}>
-			{message.map((m:any,i:any)=>{
-				return <ChatMessage key={i} message={m}/>
-			})}
-		</div>
-	)
-}
+  return (
+    <div
+      style={{ height: "400px", overflowY: "auto" }}
+      onScroll={scrollHandler}
+    >
+      {messages.map((m) => (
+        <Message key={m.id} message={m} />
+      ))}
+      <div ref={messagesAnchorRef}></div>
+    </div>
+  );
+};

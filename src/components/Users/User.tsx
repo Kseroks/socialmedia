@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserType } from "../../types/types";
 import avatar from "../../assets/photos/avatar.jpg";
 import s from "./Users.module.css";
@@ -11,23 +11,23 @@ interface PropsType {
   FollowTc: (userId: number) => void;
 }
 
-const User: React.FC<PropsType> = ({
+export const User: React.FC<PropsType> = ({
   followingInProgress,
   UnFollowTc,
   FollowTc,
   user,
 }) => {
   return (
-    <div>
+    <div className={s.user}>
       <span>
         <div>
-          <NavLink to={`/profile/${user.id}`}>
+          <Link to={`/profile/${user.id}`}>
             <img
               className={s.wh}
               src={user.photos.small != null ? user.photos.small : avatar}
               alt="user avatar"
             />
-          </NavLink>
+          </Link>
         </div>
 
         <div>
@@ -51,7 +51,9 @@ const User: React.FC<PropsType> = ({
             </button>
           )}
         </div>
+
       </span>
+      123
       <span>
         <span>
           <div>{user.name}</div>
@@ -62,8 +64,6 @@ const User: React.FC<PropsType> = ({
           <div>{"user.location.city"}</div>
         </span>
       </span>
-    </div>
+      </div>
   );
 };
-
-export default User;

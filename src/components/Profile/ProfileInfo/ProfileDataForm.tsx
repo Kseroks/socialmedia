@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
-import { SaveProfileTc } from "../../../redux/profile-reducer";
+import { thunks } from "../../../redux/profile-reducer";
 import "./ProfileInfo.module.css";
 
 export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
@@ -11,7 +11,7 @@ export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
       initialValues={profile}
       onSubmit={(values, { setSubmitting }) => {
         debugger;
-        dispatch(SaveProfileTc(values));
+        dispatch(thunks.SaveProfileTc(values));
         toEditMode(false);
         setSubmitting(false);
       }}

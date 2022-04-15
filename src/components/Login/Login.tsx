@@ -2,7 +2,7 @@ import React from "react";
 import * as yup from "yup";
 import {useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { LoginTc } from "../../redux/auth-reducer";
+import { thunks } from "../../redux/auth-reducer";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {selectors} from "../../selectors/auth-selectors";
 import s from "./Login.module.css";
@@ -29,7 +29,7 @@ export const Login: React.FC<any> = () => {
       initialValues={{ email: "", password: "", rememberMe: false, captcha: "" }}
       validationSchema={validationSchemes}
       onSubmit={(values, { setSubmitting, setStatus}) => {
-        dispatch(LoginTc(
+        dispatch(thunks.LoginTc(
           values.email,
           values.password,
           values.rememberMe,
