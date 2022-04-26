@@ -10,7 +10,6 @@ export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
     <Formik
       initialValues={profile}
       onSubmit={(values, { setSubmitting }) => {
-        debugger;
         dispatch(thunks.SaveProfileTc(values));
         toEditMode(false);
         setSubmitting(false);
@@ -52,7 +51,7 @@ export const ProfileDataForm: React.FC<any> = ({ profile, toEditMode }) => {
 
           <label>
             <b>
-              contacts
+              Contacts
               {Object.keys(profile.contacts).map((key) => {
                 return (
                   <div key={key}>

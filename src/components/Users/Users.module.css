@@ -1,16 +1,21 @@
 .wh {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  border-radius: 50%;
+  /* height: 100px; */
 }
 .wrapperDiv {
   width: 100%;
-  height: 100%;
+  height: 500px;
   display: flex;
+  flex-flow: column wrap;
   justify-content: space-around;
+  align-items: center;
 }
 .userBlock {
-  border: 1px solid black;
-  margin: 5px;
+  width: 200px;
+  height: 400px;
   padding: 5px;
+  border: 1px solid black;
   flex: 0 1 auto;
+  margin: 10px;
 }

@@ -3,19 +3,16 @@ import { useSelector } from "react-redux";
 import { ProfileDataForm } from "./ProfileDataForm";
 import { ProfileData } from "./ProfileData";
 import { ProfileStatus } from "./ProfileStatus";
-import { Preloader } from "../../common/Preloader/Preloader";
-import { selectors } from "../../../selectors/profile-selectors";
-import s from "./ProfileInfo.module.css";
+import { ProfileSel } from "../../../selectors/profile-selectors";
 import { UserAvatar } from "./UserAvatar";
 import { Row, Col } from "antd";
-export const ProfileInfo: FC<any> = ({ isOwner }) => {
-  const [editMode, setEditMode] = useState<any>(false);
-  const status = useSelector(selectors.getStatusSel);
-  const profile = useSelector(selectors.getProfileSel);
+import s from "./ProfileInfo.module.css";
 
-  if (!profile) {
-    return <Preloader />;
-  }
+
+export const ProfileInfo: FC<any> = ({ isOwner, profile }) => {
+  
+  const [editMode, setEditMode] = useState<any>(false);
+  const status = useSelector(ProfileSel.getStatus);
 
   return (
     <div>
@@ -32,7 +29,7 @@ export const ProfileInfo: FC<any> = ({ isOwner }) => {
           <Col span={12}>
             <div>
               <div>
-                <ProfileStatus PrevStatus={status} />
+                <ProfileStatus isOwner={isOwner} PrevStatus={status} />
               </div>
               {editMode ? (
                 <ProfileDataForm

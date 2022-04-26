@@ -2,16 +2,22 @@ import { Avatar, Button } from "antd";
 import React from "react";
 import s from "./Post.module.css";
 import { UserOutlined } from "@ant-design/icons";
-interface PropsType {
-  message: string;
-  likesCount: number;
-}
+import { useSelector } from "react-redux";
+import { ProfileSel } from "../../../../selectors/profile-selectors";
+// interface PropsType {
+//   message: string;
+//   likesCount: number;
+// }
 
-export const Post: React.FC<PropsType> = ({ message, likesCount }) => {
+export const Post: React.FC<any> = ({ message, likesCount }) => {
+  const profile: any= useSelector(ProfileSel.getProfile);
+
   return (
     <div className={s.item}>
-      <div>
-        <Avatar size={50} icon={<UserOutlined />} />
+      <div className={s.avatar}>
+        {profile.photos.small ? <img className={s.avatar} alt="userPhoto"
+          src={profile.photos.small} />
+          : <Avatar size={50} icon={<UserOutlined />} />}
       </div>
       <div className={s.textPost}>
         <h4>{message}</h4>

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectors } from "../../selectors/auth-selectors";
 import { thunks } from "../../redux/auth-reducer";
-// import s from "./Header.module.css";
 
 import { Layout, Avatar, Button, Typography } from "antd";
 
@@ -31,7 +30,9 @@ export const Header: React.FC<any> = () => {
               alt="Logo"
             ></img> */}
           {/* </Col> */}
-          {/* <Col span={4}> */}
+        {/* <Col span={4}> */}
+        
+
             <Avatar  size={40} icon={<UserOutlined />} />
             {isAuth ? (
               <>

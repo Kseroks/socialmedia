@@ -40,7 +40,6 @@ const profileReducer = (
 				posts: state.posts.filter((post) => post.id !== action.postId),
 			};
 		}
-
 		case "profile/SET_USER_PROFILE": {
 			return { ...state, profile: action.profile };
 		}

@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./ProfileInfo.module.css";
 import { thunks } from "../../../redux/profile-reducer";
-import avatar from "../../../assets/photos/avatar.jpg";
-
+import { Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 
 
@@ -16,7 +16,13 @@ export const UserAvatar: React.FC<any> = ({profile,isOwner,}) => {
 
   return (
     <>
-      <img className={s.avatar} alt="userPhoto" src={profile.photos.large || avatar}/>
+      <div className={s.avatar}>
+          {profile.photos.large ?
+            <img className={s.avatar} alt="userPhoto"
+          src={profile.photos.large} />
+          : <Avatar size={250} icon={<UserOutlined />} />}
+      </div>
+
 			{isOwner &&
 				<div className={s.pd}>
 					<input type="file" onChange={onMainPhotoSelected} />

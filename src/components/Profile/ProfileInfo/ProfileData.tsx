@@ -1,7 +1,9 @@
 import React from "react";
 import { Contact } from "./Contact";
 import { Button } from 'antd';
+
 export const ProfileData: React.FC<any> = ({ profile, isOwner, toEditMode }) => {
+  // debugger
   return (
     <div>
       <h3>Про Мене: {profile.aboutMe}</h3>
@@ -9,7 +11,7 @@ export const ProfileData: React.FC<any> = ({ profile, isOwner, toEditMode }) => 
       <h3>Skills: {profile.lookingForAJobDescription}</h3>
       <div>
         <h3>Contacts:</h3>
-        {Object.keys(profile.contacts).map((key) => {
+        {Object.keys(profile.contacts).map((key)  => {
           return (
             <Contact
               key={key}

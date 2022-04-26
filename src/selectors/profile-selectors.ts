@@ -1,16 +1,16 @@
 import { AppStateType } from "../redux/redux-store";
 
-export const selectors = {
-  getProfileSel: (state: AppStateType) => {
+export const ProfileSel = {
+  getProfile: (state: AppStateType) => {
     return state.profilePage.profile;
   },
-  getStatusSel: (state: AppStateType) => {
+  getStatus: (state: AppStateType) => {
     return state.profilePage.status;
   },
-  getPostsSel: (state: AppStateType) => {
+  getPosts: (state: AppStateType) => {
     return state.profilePage.posts;
   },
-  getNewPostTextSel: (state: AppStateType) => {
+  getNewPostText: (state: AppStateType) => {
     return state.profilePage.newPostText;
   },
 };

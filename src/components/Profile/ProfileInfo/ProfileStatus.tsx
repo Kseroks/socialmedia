@@ -1,11 +1,14 @@
 import { useState, useEffect, FC } from "react";
 import { useDispatch } from "react-redux";
 import { thunks } from "../../../redux/profile-reducer";
-import { Input } from 'antd';
+import { Input } from "antd";
 
-interface TypeProps {PrevStatus: string;}
+interface TypeProps {
+  PrevStatus: string;
+  isOwner: boolean;
+}
 
-export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
+export const ProfileStatus: FC<TypeProps> = ({ isOwner, PrevStatus }) => {
   const dispatch = useDispatch();
 
   const [editMode, SetEditMode] = useState(false);
@@ -30,23 +33,32 @@ export const ProfileStatus: FC<TypeProps> = ({ PrevStatus }) => {
 
   return (
     <>
-    <div>
-      {!editMode && (
-        <div>
-          <h2 onDoubleClick={activatedEditMode}>{PrevStatus}</h2>
-        </div>
-      )}
-      {editMode && (
-        <div>
-          <Input
-            onChange={onStatusChange}
-            autoFocus={true}
-            onBlur={deactivatedEditMode}
-            value={status}
-          />
-        </div>
-      )}
+      <div>
+        {isOwner ? (
+              <div>
+                {!editMode && (
+                  <div>
+                    <h2 onDoubleClick={activatedEditMode}>
+                      Status: {PrevStatus}
+                    </h2>
+                  </div>
+                )}
+              </div>
+        ) : (
+          <div>{<h2>Status: {PrevStatus}</h2>}</div>
+        )}
+
+        {editMode && (
+          <div>
+            <Input
+              onChange={onStatusChange}
+              autoFocus={true}
+              onBlur={deactivatedEditMode}
+              value={status}
+            />
+          </div>
+        )}
       </div>
-      </>
+    </>
   );
 };

@@ -4,8 +4,10 @@ import { ChatMessages } from "./ChatMessages";
 import { useDispatch, useSelector } from "react-redux";
 import { thunks } from "../../redux/chat-reducer";
 import { selectors } from "../../selectors/chat-selectors";
+import { compose } from "redux";
+import WithAuthRedirect from "../../hoc/WithAuthRedirect";
 
-export const ChatPage = () => {
+const ChatPage = () => {
   const dispatch = useDispatch();
   const status = useSelector(selectors.getStatus);
 
@@ -28,3 +30,4 @@ export const ChatPage = () => {
     </div>
   );
 };
+export default compose(WithAuthRedirect)(ChatPage);
